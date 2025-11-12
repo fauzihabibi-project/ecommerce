@@ -20,7 +20,7 @@ class User
             if(Auth::user()->role == 'user'){
                 return $next($request);
             }else{
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('dashboard');
                 // abort(403, 'Unauthorized action.');
             }
         }else{

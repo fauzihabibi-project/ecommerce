@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('price', 12, 2); 
             $table->integer('stock'); 
             $table->string('image'); 
+            $table->string('slug')->unique()->after('name');
             $table->timestamps(); 
         });
     }

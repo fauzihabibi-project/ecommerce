@@ -1,3 +1,1 @@
-<a href="logout" wire:click.prevent="logout" class="flex-c-m trans-04 p-lr-25">
-    Logout
-</a>
+<li><a class="dropdown-item text-danger" href="logout" wire:click.prevent="logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>

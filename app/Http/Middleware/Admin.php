@@ -21,7 +21,7 @@ class Admin
         }
 
         if (Auth::user()->role !== 'admin') {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('home');
         }
 
         return $next($request);

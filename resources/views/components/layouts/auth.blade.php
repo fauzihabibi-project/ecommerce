@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/src/assets/images/logos/favicon.png')}}" />
-    <link rel="stylesheet" href="{{ asset('admin/src/assets/css/styles.min.css')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('template/src/assets/images/logos/favicon.png')}}" />
+    <link rel="stylesheet" href="{{ asset('template/src/assets/css/styles.min.css')}}" />
 </head>
 
 <body>
@@ -15,8 +15,8 @@
         {{ $slot }}
     </div>
     
-    <script src="{{ asset('admin/src/assets/libs/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{ asset('admin/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('template/src/assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('template/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 </body>
 
 </html>

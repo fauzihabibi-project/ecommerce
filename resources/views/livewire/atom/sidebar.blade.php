@@ -37,7 +37,7 @@
             <span class="hide-menu">ORDER</span>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+            <a class="sidebar-link" wire:navigate href="{{ route('list.orders') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-mood-happy"></i>
                 </span>
@@ -45,11 +45,11 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('transactions') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-aperture"></i>
                 </span>
-                <span class="hide-menu">Transaction</span>
+                <span class="hide-menu">Transactions</span>
             </a>
         </li>
         <li class="nav-small-cap">

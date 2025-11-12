@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id(); // pakai city_id dari RajaOngkir
             $table->foreignId('province_id')->constrained('provinces')->onDelete('cascade');
             $table->string('name');
-            $table->string('type'); // Kabupaten atau Kota
-            $table->string('postal_code');
+            $table->timestamps();
         });
     }
 

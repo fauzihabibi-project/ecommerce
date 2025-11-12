@@ -20,33 +20,35 @@ class AddProduct extends Component
         'description' => 'nullable|string',
         'stock' => 'required|integer|min:0',
         'category_id' => 'required|exists:categories,id',
-        'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
     ];
 
     public function saveProduct()
     {
         $this->validate();
 
-        // Ubah nama produk jadi slug agar aman untuk nama file (contoh: "acer-predator")
         $slug = Str::slug($this->name);
 
-        // Ambil ekstensi asli gambar (jpg, png, dll)
+        // Jika slug sudah ada, tambahkan angka unik di belakang
+        $originalSlug = $slug;
+        $count = 1;
+        while (Products::where('slug', $slug)->exists()) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
         $extension = $this->image->getClientOriginalExtension();
-
-        // Buat nama file unik (misal: acer-predator-6747b39f7a1b1.jpg)
         $filename = $slug . '-' . uniqid() . '.' . $extension;
-
-        // Simpan file ke folder storage/app/public/product
         $imagePath = $this->image->storeAs('product', $filename, 'public');
 
-        // Simpan ke database
         Products::create([
             'name' => $this->name,
+            'slug' => $slug, 
             'price' => $this->price,
             'description' => $this->description,
             'stock' => $this->stock,
             'category_id' => $this->category_id,
-            'image' => $imagePath, // hasil: product/acer-predator-xxxxxx.jpg
+            'image' => $imagePath,
         ]);
 
         $this->reset();

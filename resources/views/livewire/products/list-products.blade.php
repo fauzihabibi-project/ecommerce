@@ -13,6 +13,7 @@
                         <a href="{{ route('product.add') }}" wire:navigate class="btn btn-primary">
                             Add Product
                         </a>
+                        
                     </div>
 
                     <div class="table-responsive">

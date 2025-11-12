@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <label class="form-label">Price</label>
                             <input
-                                type="text"
+                                type="number"
                                 x-data
                                 x-on:input="
                                 let number = $el.value.replace(/[^\d]/g, '');
