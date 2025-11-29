@@ -64,11 +64,16 @@ class EditAddress extends Component
     public function updatedProvinceId($provinceId)
     {
         $this->city_id = '';
+
         $this->cities = Cities::where('province_id', $provinceId)
             ->orderBy('name', 'asc')
             ->get(['id', 'name'])
             ->toArray();
+
+        // 🔥 Untuk animasi & refresh kota (biar sama seperti ADD ADDRESS)
+        $this->dispatch('kota-diperbarui');
     }
+
 
     public function update()
     {

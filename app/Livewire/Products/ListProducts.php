@@ -9,6 +9,10 @@ class ListProducts extends Component
 {
     public $products;
 
+    protected $listeners = [
+        'deleteProduct' => 'delete'
+    ];
+
     public function mount()
     {
         $this->products = Products::with('category')->latest()->get();
@@ -28,7 +32,7 @@ class ListProducts extends Component
         $this->js(<<<JS
         Swal.fire({
             icon: 'success',
-            title: 'Product berhasil dihapus!',
+            title: 'Product deleted successfully!',
             toast: true,
             position: 'top-end',
             timer: 2000,

@@ -33,11 +33,12 @@ class EditCategory extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil!',
-                text: 'Kategori berhasil diperbarui.',
+                title: 'Category updated successfully!',
+                toast: true,
+                position: 'top-end',
                 timer: 2000,
                 showConfirmButton: false
-            })
+            });
         JS);
 
         return redirect()->route('categories');

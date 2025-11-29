@@ -72,8 +72,8 @@
                 <div class="col-md-6">
                     <div class="p-3 border rounded">
                         <p><strong>Status:</strong> {{ $order->status }}</p>
-                        <p><strong>Total Pembayaran:</strong> Rp {{ number_format($order->total_amount, 0, ',', '.') }}</p>
-                        <p><strong>Kurir:</strong> {{ $order->courier }}</p>
+                        <p><strong>Total payment:</strong> Rp {{ number_format($order->total_amount, 0, ',', '.') }}</p>
+                        <p><strong>Courier:</strong> {{ $order->courier }}</p>
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                     <div class="credit-card">
                         <div class="bank-name">BANK BRI</div>
 
-                        <img class="chip" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/EMV-chip.svg">
+                        <img class="chip" style="width: 35px; height: 35px;" src="{{ asset('img/chip.png') }}" alt="Chip">
 
                         <div class="account-number">
                             1234 5678 900
@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="mt-3" style="opacity:0.7;font-size:13px;">
-                            Silakan transfer sesuai nominal pembayaran.
+                            Please transfer the exact payment amount.
                         </div>
                     </div>
                 </div>
@@ -101,9 +101,9 @@
 
             <hr class="my-4">
 
-            <!-- Upload Bukti -->
+            <!-- Upload Proof -->
             <div class="mb-3">
-                <label class="form-label fw-semibold">Upload Bukti Pembayaran</label>
+                <label class="form-label fw-semibold">Upload Proof of Payment</label>
                 <input type="file" wire:model="proof" class="form-control">
                 @error('proof') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
@@ -116,7 +116,7 @@
 
             <div>
                 <button wire:click="uploadProof" class="btn btn-primary w-100 fw-semibold rounded-pill shadow-sm">
-                    <i class="bi bi-upload me-2"></i> Upload Bukti Pembayaran
+                    <i class="bi bi-upload me-2"></i> Upload Proof of Payment
                 </button>
             </div>
 

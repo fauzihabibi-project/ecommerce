@@ -213,10 +213,11 @@
 		}
 
 		document.addEventListener('livewire:navigated', () => {
-			const theme = localStorage.getItem('theme');
+			const theme = localStorage.getItem('theme') || 'dark';
 			if (theme) document.documentElement.setAttribute('data-theme', theme);
 		});
 	</script>
+	@stack('scripts')
 </body>
 
 </html>

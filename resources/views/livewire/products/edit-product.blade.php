@@ -76,7 +76,7 @@
                                         @elseif ($oldImage)
                                         <img src="{{ asset('storage/' . $oldImage) }}" class="rounded" width="120">
                                         @else
-                                        <span class="text-muted small">Belum ada gambar</span>
+                                        <span class="text-muted small">No images yet</span>
                                         @endif
                                     </div>
                             </div>

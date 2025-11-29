@@ -41,13 +41,13 @@ class Payment extends Component
             'status' => 'Pending',
         ]);
 
-        $this->order->update(['status' => 'Menunggu Konfirmasi Pembayaran']);
+        $this->order->update(['status' => 'Waiting for Payment Confirmation']);
 
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Bukti pembayaran berhasil diupload!',
-                text: 'Admin akan memverifikasi pembayaran Anda.',
+                title: 'Proof of payment successfully uploaded!',
+                text: 'Admin will verify your payment.',
                 toast: true,
                 position: 'top-end',
                 timer: 3000,

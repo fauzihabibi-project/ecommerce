@@ -12,7 +12,7 @@ class Logout extends Component
         Auth::logout();
         session()->invalidate();
         session()->regenerateToken();
-        return $this->redirectIntended(route('login'), navigate: true);
+        return $this->redirectIntended(route('home'), navigate: true);
     }
     
     public function render()

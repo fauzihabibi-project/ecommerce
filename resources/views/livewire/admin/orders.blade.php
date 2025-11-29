@@ -3,11 +3,7 @@
         <div class="col-12">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">List Orders</h5>
-
-                    @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
+                    <h5 class="card-title fw-semibold mb-4">Orders</h5>
 
                     <div class="table-responsive">
                         <table class="table mb-0 align-middle">
@@ -20,10 +16,10 @@
                                         <h6 class="fw-semibold mb-0">User</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fw-semibold mb-0">Alamat</h6>
+                                        <h6 class="fw-semibold mb-0">Address</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fw-semibold mb-0">Kurir</h6>
+                                        <h6 class="fw-semibold mb-0">Courier</h6>
                                     </th>
                                     <th>
                                         <h6 class="fw-semibold mb-0">Total</h6>
@@ -32,7 +28,7 @@
                                         <h6 class="fw-semibold mb-0">Status</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                        <h6 class="fw-semibold mb-0">Date</h6>
                                     </th>
                                     <th>
                                         <h6 class="fw-semibold mb-0">Action</h6>
@@ -74,9 +70,8 @@
                                                 class="btn btn-sm btn-primary">
                                                 <i class="ti ti-eye"></i>
                                             </a>
-                                            <button wire:click="delete({{ $order->id }})"
-                                                class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Hapus pesanan ini?')">
+                                            <button wire:click="$dispatch('confirm-delete', { id: {{ $order->id }} })"
+                                                class="btn btn-sm btn-danger">
                                                 <i class="ti ti-trash"></i>
                                             </button>
                                         </div>
@@ -85,7 +80,7 @@
                                 @empty
                                 <tr>
                                     <td colspan="8" class="text-center text-muted py-4">
-                                        Belum ada pesanan
+                                        No orders yet
                                     </td>
                                 </tr>
                                 @endforelse
@@ -98,3 +93,31 @@
         </div>
     </div>
 </div>
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('confirm-delete', data => {
+
+            Swal.fire({
+                title: 'Delete Order?',
+                text: "This order will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteOrder', {
+                        id: data.id
+                    });
+                }
+            });
+
+        });
+    });
+</script>
+@endpush

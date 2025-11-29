@@ -20,14 +20,14 @@
 
                         <!-- FOTO -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Foto Profil</label>
+                            <label class="form-label fw-semibold">Profile Photo</label>
                             <input type="file" class="form-control" wire:model="foto">
                             @error('foto') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <!-- NAMA -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Nama Lengkap</label>
+                            <label class="form-label fw-semibold">Full Name</label>
                             <input type="text" class="form-control" wire:model="name">
                             @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
@@ -41,16 +41,16 @@
 
                         <!-- PHONE -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Nomor HP</label>
+                            <label class="form-label fw-semibold">Phone Number</label>
                             <input type="text" class="form-control" wire:model="phone">
                             @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <!-- PASSWORD -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Password Baru</label>
+                            <label class="form-label fw-semibold">New Password</label>
                             <input type="password" class="form-control" wire:model="password">
-                            <small class="text-muted">Kosongkan jika tidak ingin mengganti password.</small>
+                            <small class="text-muted">Leave blank if you do not want to change the password.</small>
                             <br>
                             @error('password') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
@@ -58,11 +58,11 @@
                         <!-- BUTTON -->
                         <div class="text-end">
                             <a href="{{ route('profile.admin') }}" class="btn btn-secondary px-4">
-                                Batal
+                                Cancel
                             </a>
 
                             <button type="submit" class="btn btn-primary px-4 ms-2">
-                                Simpan Perubahan
+                                Save Changes
                             </button>
                         </div>
 

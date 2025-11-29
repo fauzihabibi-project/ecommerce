@@ -29,7 +29,7 @@ class AddToCart extends Component
             $this->js(<<<JS
                 Swal.fire({
                     icon: 'error',
-                    title: 'Produk tidak ditemukan!',
+                    title: 'Product not found!',
                     toast: true,
                     position: 'top-end',
                     timer: 2000,
@@ -63,7 +63,7 @@ class AddToCart extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Produk ditambahkan ke keranjang!',
+                title: 'Product added to cart!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,

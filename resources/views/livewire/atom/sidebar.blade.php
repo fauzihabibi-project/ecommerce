@@ -7,7 +7,7 @@
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
                 <span>
-                    <i class="ti ti-layout-dashboard"></i>
+                    <i class="ti ti-home"></i>
                 </span>
                 <span class="hide-menu">Dashboard</span>
             </a>
@@ -19,15 +19,15 @@
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{ route('products') }}" wire:navigate aria-expanded="false">
                 <span>
-                    <i class="ti ti-article"></i>
+                    <i class="ti ti-package"></i>
                 </span>
-                <span class="hide-menu">List Product</span>
+                <span class="hide-menu">Products</span>
             </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{ route('categories') }}" wire:navigate aria-expanded="false">
                 <span>
-                    <i class="ti ti-article"></i>
+                    <i class="ti ti-list"></i>
                 </span>
                 <span class="hide-menu">Categories</span>
             </a>
@@ -39,15 +39,15 @@
         <li class="sidebar-item">
             <a class="sidebar-link" wire:navigate href="{{ route('list.orders') }}" aria-expanded="false">
                 <span>
-                    <i class="ti ti-mood-happy"></i>
+                    <i class="ti ti-article"></i>
                 </span>
-                <span class="hide-menu">List Order</span>
+                <span class="hide-menu">Orders</span>
             </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" wire:navigate href="{{ route('transactions') }}" aria-expanded="false">
                 <span>
-                    <i class="ti ti-aperture"></i>
+                    <i class="ti ti-wallet"></i>
                 </span>
                 <span class="hide-menu">Transactions</span>
             </a>

@@ -9,12 +9,12 @@
         init() {
             document.documentElement.setAttribute('data-theme', this.theme);
         }
-     }"
+    }"
     x-init="init()">
     <div class="row justify-content-center g-4">
 
         <!-- Kolom Kiri: Profil -->
-        <div class="col-md-4 card mb-4 mb-md-0 border-0">
+        <div class="col-md-5 card mb-4 mb-md-0 border-0">
             <div class="p-4 rounded text-center">
                 @if ($user->foto)
                 <img src="{{ asset('storage/' . $user->foto) }}"
@@ -32,7 +32,7 @@
 
                 <h4 class="fw-bold mb-1 text-uppercase">{{ $user->name }}</h4>
                 <small class="text-success text-capitalize d-block mb-3">
-                    {{ $user->role ?? 'user' }}
+                    {{ $user->username ?? 'username' }}
                 </small>
 
                 <hr>
@@ -69,7 +69,7 @@
 
                     <div class="mb-1 d-flex">
                         <strong style="width: 100px;">Status</strong>
-                        : <span class="badge bg-success">Aktif</span>
+                        : <span class="badge bg-success">Active</span>
                     </div>
 
                 </div>
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Kolom Kanan: Daftar Alamat -->
-        <div class="col-md-6 card mb-4 border-0 ms-md-4">
+        <div class="col-md-5 card mb-4 border-0 ms-md-4">
             <div class="p-4 rounded">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">ADDRESS LIST</h5>
@@ -128,12 +128,13 @@
                                     title="Edit">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <button wire:click="delete({{ $address->id }})"
+                                <button
+                                    wire:click="$dispatch('confirm-delete', { id: {{ $address->id }} })"
                                     class="btn btn-sm btn-outline-danger rounded-pill d-flex align-items-center justify-content-center"
-                                    onclick="return confirm('Hapus Alamat ini?')"
                                     title="Hapus">
                                     <i class="fa fa-trash"></i>
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -144,3 +145,31 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('confirm-delete', data => {
+
+            Swal.fire({
+                title: 'Delete Address?',
+                text: "This address will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteAddress', {
+                        id: data.id
+                    });
+                }
+            });
+
+        });
+    });
+</script>
+@endpush

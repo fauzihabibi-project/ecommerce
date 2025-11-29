@@ -28,7 +28,7 @@ class Transactions extends Model
     // Relasi ke payment
     public function payment()
     {
-        return $this->belongsTo(Payments::class);
+        return $this->belongsTo(Payments::class, 'payment_id');
     }
 
     // Relasi ke order

@@ -25,11 +25,12 @@ class AddCategory extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil!',
-                text: 'Kategori berhasil ditambahkan.',
+                title: 'Category added successfully!',
+                toast: true,
+                position: 'top-end',
                 timer: 2000,
                 showConfirmButton: false
-            })
+            });
         JS);
 
         //  Kembali ke halaman sebelumnya

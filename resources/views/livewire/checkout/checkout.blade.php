@@ -1,13 +1,13 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-12 p-4 rounded shadow-sm">
-            <h4 class="fw-bold text-center text-success">Checkout Pesanan</h4>
-            <p class="mt-1 mb-4 text-center text-muted">Silakan isi alamat pengiriman dan pilih kurir. dan pastikan pesanan sesuai sebelum di Checkout</p>
+            <h4 class="fw-bold text-center text-success">Checkout</h4>
+            <p class="mt-1 mb-4 text-center text-muted">Please fill in the shipping address and select a courier. Make sure the order is correct before checking out.</p>
 
             <!-- Daftar Barang -->
             <!-- Daftar Barang (Card Modern) -->
             <div class="mb-4">
-                <h6 class="fw-bold mb-3">Barang di Keranjang</h6>
+                <h6 class="fw-bold mb-3">Items in Cart</h6>
 
                 <div class="row g-3">
                     @foreach ($cartItems as $item)
@@ -34,11 +34,11 @@
                                     <h6 class="fw-semibold mb-1">{{ $item->product->name }}</h6>
 
                                     <p class="mb-1 text-muted small">
-                                        Jumlah: <strong>{{ $item->quantity }}</strong>
+                                        Qty: <strong>{{ $item->quantity }}</strong>
                                     </p>
 
                                     <p class="mb-0 text-muted small">
-                                        Harga: Rp {{ number_format($item->product->price, 0, ',', '.') }}
+                                        Price: Rp {{ number_format($item->product->price, 0, ',', '.') }}
                                     </p>
                                 </div>
 
@@ -59,9 +59,9 @@
 
             <!-- Pilih Alamat -->
             <div class="mb-4">
-                <label class="form-label fw-semibold">Pilih Alamat Pengiriman</label>
+                <label class="form-label fw-semibold">Select Shipping Address</label>
                 <select wire:model.live="selectedAddress" class="form-select">
-                    <option value="">-- Pilih Alamat --</option>
+                    <option value="">-- Select Address --</option>
                     @foreach ($addresses as $address)
                     <option value="{{ $address->id }}">
                         {{ $address->recipient_name }} - {{ $address->city->name ?? '' }}
@@ -75,30 +75,29 @@
 
             <!-- Pilih Kurir -->
             <div class="mb-4">
-                <label class="form-label fw-semibold">Pilih Kurir Pengiriman</label>
+                <label class="form-label fw-semibold">Select Shipping Courier</label>
                 <select wire:model="courier" class="form-select">
-                    <option value="">-- Pilih Kurir --</option>
+                    <option value="">-- Select Courier --</option>
                     <option value="JNE">JNE</option>
                     <option value="J&T">J&T</option>
-                    <option value="Manual">Manual (Ambil Sendiri)</option>
                 </select>
                 @error('courier') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
 
             <!-- Ringkasan Biaya -->
             <div class="border rounded p-3 mb-3">
-                <h6 class="fw-bold mb-3">Ringkasan Pembayaran</h6>
+                <h6 class="fw-bold mb-3">Payment Summary</h6>
                 <div class="d-flex justify-content-between">
-                    <span>Total Barang:</span>
+                    <span>Total Items:</span>
                     <span>Rp {{ number_format($cartTotal, 0, ',', '.') }}</span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span>Ongkir:</span>
+                    <span>Shipping Cost:</span>
                     <span>Rp {{ number_format($shippingCost, 0, ',', '.') }}</span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between fw-bold text-success">
-                    <span>Total Bayar:</span>
+                    <span>Total Payment:</span>
                     <span>Rp {{ number_format($cartTotal + $shippingCost, 0, ',', '.') }}</span>
                 </div>
             </div>
@@ -106,7 +105,7 @@
             <!-- Tombol -->
             <div class="text-end">
                 <button wire:click="placeOrder" class="btn btn-success px-4 fw-semibold rounded-pill shadow-sm">
-                    <i class="bi bi-cart-check me-2"></i> Buat Pesanan
+                    <i class="bi bi-cart-check me-2"></i> Place Order
                 </button>
             </div>
         </div>

@@ -60,7 +60,7 @@ class ProfileAdminEdit extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Profil berhasil diperbarui!',
+                title: 'Profile updated successfully!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,

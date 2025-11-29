@@ -1,6 +1,6 @@
 <div class="card shadow-sm border-0 p-4 m-3">
     <div class="card-body">
-        <h5 class="fw-bold mb-3">Tambah Alamat Baru</h5>
+        <h5 class="fw-bold mb-3">Add New Address</h5>
 
         @if (session()->has('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -8,24 +8,24 @@
 
         <form wire:submit.prevent="save">
             <div class="row">
-                {{-- Nama dan Telepon --}}
+                {{-- Recipient Name and Phone --}}
                 <div class="col-md-6 mb-3" >
-                    <label class="form-label">Nama Penerima</label>
+                    <label class="form-label">Recipient Name</label>
                     <input type="text" class="form-control" wire:model="recipient_name">
                     @error('recipient_name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Nomor Telepon</label>
+                    <label class="form-label">Recipient Phone</label>
                     <input type="text" class="form-control" wire:model="recipient_phone">
                     @error('recipient_phone') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                {{-- Provinsi --}}
+                {{-- Province --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Provinsi</label>
+                    <label class="form-label">Province</label>
                     <select class="form-select" wire:model.live="province_id">
-                        <option value="">-- Pilih Provinsi --</option>
+                        <option value="">-- Select Province --</option>
                         @foreach ($provinces as $province)
                             <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
                         @endforeach
@@ -33,9 +33,9 @@
                     @error('province_id') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                {{-- Kota --}}
+                {{-- City --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Kota / Kabupaten</label>
+                    <label class="form-label">City / Regency</label>
                     <div class="position-relative">
                         {{-- Spinner ketika loading --}}
                         <div wire:loading wire:target="province_id" class="spinner-border spinner-border-sm text-primary position-absolute top-50 end-0 translate-middle-y me-3" role="status">
@@ -43,7 +43,7 @@
                         </div>
 
                         <select class="form-select" wire:model="city_id" @disabled(empty($cities))>
-                            <option value="">-- Pilih Kota / Kabupaten --</option>
+                            <option value="">-- Select City / Regency --</option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
                             @endforeach
@@ -52,16 +52,16 @@
                     @error('city_id') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                {{-- Alamat lengkap --}}
+                {{-- Full Address --}}
                 <div class="col-12 mb-3">
-                    <label class="form-label">Alamat Lengkap</label>
+                    <label class="form-label">Full Address</label>
                     <textarea class="form-control" rows="3" wire:model="address_detail"></textarea>
                     @error('address_detail') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
-                {{-- Kode pos & Catatan --}}
+                {{-- Postal Code & Notes --}}
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Kode Pos</label>
+                    <label class="form-label">Postal Code</label>
                     <input type="text" class="form-control" wire:model="postal_code">
                     @error('postal_code') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
@@ -76,18 +76,18 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" wire:model="is_default" id="defaultCheck">
                         <label class="form-check-label" for="defaultCheck">
-                            Jadikan sebagai alamat utama
+                            Set as default address
                         </label>
                     </div>
                 </div>
 
-                {{-- Tombol --}}
+                {{-- Button --}}
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <a href="{{ route('profile') }}" wire:navigate class="btn btn-outline-secondary rounded-pill">
-                        Batal
+                        Cancel
                     </a>
                     <button type="submit" class="btn btn-primary rounded-pill">
-                        Simpan Perubahan
+                        Save 
                     </button>
                 </div>
             </div>

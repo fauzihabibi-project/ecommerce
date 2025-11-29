@@ -23,6 +23,26 @@ class Checkout extends Component
     {
         $this->addresses = Addresses::where('user_id', Auth::id())->get();
 
+        if ($this->addresses->count() == 0) {
+
+            $url = route('add.address'); // ganti sesuai route kamu
+
+            $this->js(<<<JS
+            Swal.fire({
+                icon: 'warning',
+                title: 'Address Not Available Yet',
+                text: 'Please add an address before checking out.',
+                showCancelButton: true,
+                confirmButtonText: 'Add Address Now',
+                cancelButtonText: 'Maybe Later',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '$url';
+                }
+            });
+        JS);
+        }
+
         // Hitung total harga keranjang
         $this->cartTotal = Cart::where('user_id', Auth::id())
             ->with('product')
@@ -66,12 +86,14 @@ class Checkout extends Component
             'total_amount' => $total,
             'shipping_cost' => $this->shippingCost,
             'courier' => $this->courier,
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Waiting for Payment',
         ]);
 
         $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
 
         foreach ($cartItems as $item) {
+
+            // 👉 Simpan item ke tabel order_items
             OrderItems::create([
                 'order_id' => $order->id,
                 'product_id' => $item->product_id,
@@ -79,12 +101,26 @@ class Checkout extends Component
                 'price' => $item->product->price,
                 'subtotal' => $item->product->price * $item->quantity,
             ]);
+
+            // 👉 Kurangi stok produk
+            $product = $item->product;
+
+            // Pastikan stok tidak minus
+            if ($product->stock >= $item->quantity) {
+                $product->stock -= $item->quantity;
+            } else {
+                $product->stock = 0; // fallback aman
+            }
+
+            $product->save();
         }
 
+        // 👉 Hapus semua cart setelah pesanan dibuat
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.payment', ['orderId' => $order->id]);
     }
+
 
     public function render()
     {

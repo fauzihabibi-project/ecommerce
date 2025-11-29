@@ -68,7 +68,7 @@ class AddAddress extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Alamat berhasil ditambahkan!',
+                title: 'Address added successfully!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,

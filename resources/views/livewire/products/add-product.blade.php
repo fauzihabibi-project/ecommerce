@@ -56,23 +56,23 @@
 
                             <!-- Image 1 -->
                             <input wire:model="image1" type="file"
-                                class="form-control mb-2 @error('image1') is-invalid @enderror"
+                                class="form-control mb-4 @error('image1') is-invalid @enderror"
                                 required>
                             @error('image1') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
 
                             <!-- Image 2 -->
                             <input wire:model="image2" type="file"
-                                class="form-control mb-2 @error('image2') is-invalid @enderror">
+                                class="form-control mb-4 @error('image2') is-invalid @enderror">
                             @error('image2') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
 
                             <!-- Image 3 -->
                             <input wire:model="image3" type="file"
-                                class="form-control mb-2 @error('image3') is-invalid @enderror">
+                                class="form-control mb-4 @error('image3') is-invalid @enderror">
                             @error('image3') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
 
                             <!-- Image 4 -->
                             <input wire:model="image4" type="file"
-                                class="form-control mb-2 @error('image4') is-invalid @enderror">
+                                class="form-control mb-4 @error('image4') is-invalid @enderror">
                             @error('image4') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
 
                             <!-- Preview -->

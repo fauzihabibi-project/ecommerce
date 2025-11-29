@@ -13,7 +13,11 @@ class Profile extends Component
     public $user;
     public $addresses = [];
 
-    protected $listeners = ['addressAdded' => 'refreshAddresses'];
+    protected $listeners = [
+        'addressAdded' => 'refreshAddresses',
+        'deleteAddress' => 'delete'
+    ];
+
 
     public function mount()
     {
@@ -25,10 +29,20 @@ class Profile extends Component
     public function delete($id)
     {
         $address = Addresses::findOrFail($id);
-        
+
         $address->delete();
         $this->addresses = Addresses::where('user_id', $this->user->id)->get();
-        session()->flash('success', 'Address deleted successfully.');
+
+        $this->js(<<<JS
+            Swal.fire({
+                icon: 'success',
+                title: 'Address deleted successfully!',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        JS);
     }
 
     public function refreshAddresses()

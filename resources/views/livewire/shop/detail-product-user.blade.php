@@ -3,7 +3,7 @@
     <!-- Detail Produk -->
     <section class="container py-5">
         <a wire:navigate href="{{ route('shop') }}" class="btn btn-secondary mb-4 rounded-pill shadow-sm">
-            ← Kembali ke Toko
+            ← Beck
         </a>
 
         <div class="row g-5 align-items-start">
@@ -52,14 +52,11 @@
                 </p>
 
                 <div class="small text-secondary mb-4 d-flex flex-column gap-1">
-                    <div><i class="bi bi-tags text-primary me-2"></i>Kategori:
+                    <div><i class="bi bi-tags text-primary me-2"></i>Category:
                         <strong>{{ $product->category->name ?? '-' }}</strong>
                     </div>
-                    <div><i class="bi bi-box-seam text-primary me-2"></i>Stok:
+                    <div><i class="bi bi-box-seam text-primary me-2"></i>Stock:
                         <strong>{{ $product->stock }}</strong>
-                    </div>
-                    <div><i class="bi bi-clock-history text-primary me-2"></i>Diperbarui:
-                        <strong>{{ $product->updated_at->diffForHumans() }}</strong>
                     </div>
                 </div>
 
@@ -75,8 +72,8 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h4 class="fw-bold mb-1">Produk Terkait</h4>
-                    <p class="text-muted mb-0">Rekomendasi untuk Anda</p>
+                    <h4 class="fw-bold mb-1">Related Products</h4>
+                    <p class="text-muted mb-0">Product recommendations for you that you might like</p>
                 </div>
             </div>
 

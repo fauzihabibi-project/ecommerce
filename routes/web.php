@@ -9,6 +9,7 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Profile\Profile;
 use App\Livewire\Checkout\Payment;
 use App\Livewire\Admin\OrderDetail;
+use App\Livewire\Shop\OrderDetail as OrderDetailUser;
 use App\Livewire\Checkout\Checkout;
 use App\Livewire\Address\AddAddress;
 use App\Livewire\Address\EditAddress;
@@ -28,6 +29,7 @@ use App\Livewire\Categories\EditCategory;
 use App\Livewire\Profile\ProfileAdminEdit;
 use App\Livewire\Transaction\Transactions;
 use App\Livewire\Shop\Orders as OrdersUser;
+use App\Livewire\User\Services;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -87,6 +89,7 @@ Route::get('/', Home::class)->name('home');
 
 Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/shop', ListProductsUser::class)->name('shop');
+    Route::get('/services', Services::class)->name('services');
     Route::get('/detail/product/{slug}', DetailProductUser::class)->name('user.product.detail');
     Route::get('/cart', CartPage::class)->name('cart');
     Route::get('/profile', Profile::class)->name('profile');
@@ -96,4 +99,6 @@ Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/checkout', Checkout::class)->name('checkout');
     Route::get('/payment/{orderId}', Payment::class)->name('user.payment');
     Route::get('/orders', OrdersUser::class)->name('orders');
+    Route::get('/order/detail/{hashid}', OrderDetailUser::class)
+    ->name('user.order.detail');
 });

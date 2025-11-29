@@ -65,7 +65,7 @@ class AddProduct extends Component
         $this->js(<<<JS
         Swal.fire({
             icon: 'success',
-            title: 'Product berhasil disimpan!',
+            title: 'Product successfully saved!',
             toast: true,
             position: 'top-end',
             timer: 2000,

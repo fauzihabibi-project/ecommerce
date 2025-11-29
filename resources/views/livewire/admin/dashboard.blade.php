@@ -2,11 +2,12 @@
 
     <!-- ROW CARD -->
     <div class="row mb-4">
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card shadow-sm border-0" style="border-radius: 15px; background: linear-gradient(135deg, #28a745, #5cd186);">
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm border-0" style="border-radius: 15px; background: linear-gradient(135deg, #287fa7ff, #5ca6d1ff);">
                 <div class="card-body text-white">
-                    <h6 class="fw-semibold opacity-75">Total Pemasukan</h6>
-                    <h2 class="fw-bold mt-2">
+                    <h5 class="card-title fw-semibold text-white">Income</h5>
+                    <p class="text-muted small mb-0 text-white">Total of all sales</p>
+                    <h2 class="fw-bold mt-2 mb-0 text-white">
                         Rp {{ number_format($totalPemasukan, 0, ',', '.') }}
                     </h2>
                 </div>
@@ -21,8 +22,8 @@
         <div class="col-lg-8 d-flex mb-4">
             <div class="card shadow-sm border-0 w-100" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 pb-0">
-                    <h5 class="card-title fw-semibold">Laporan Penjualan</h5>
-                    <p class="text-muted small mb-0">Grafik penjualan berdasarkan bulan</p>
+                    <h5 class="card-title fw-semibold">Sales report</h5>
+                    <p class="text-muted small mb-0">Sales report based on months</p>
                 </div>
                 <div class="card-body">
                     <div id="grafik-penjualan" style="min-height: 350px;"></div>
@@ -34,8 +35,8 @@
         <div class="col-lg-4 d-flex mb-4">
             <div class="card shadow-sm border-0 w-100" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 pb-0">
-                    <h5 class="card-title fw-semibold">Kategori Terjual</h5>
-                    <p class="text-muted small mb-0">Persentase kategori produk yang terjual</p>
+                    <h5 class="card-title fw-semibold">Categories Sold</h5>
+                    <p class="text-muted small mb-0">Percentage of product categories sold</p>
                 </div>
                 <div class="card-body">
                     <div id="grafik-kategori" style="min-height: 350px;"></div>

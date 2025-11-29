@@ -102,11 +102,11 @@
                 <!-- Tombol Aksi Kanan -->
                 <div class="d-flex gap-2">
 
-                    @if($order->status === 'Menunggu Konfirmasi Pembayaran')
+                    @if($order->status === 'Waiting for Payment Confirmation')
                     <button
                         wire:click="confirmPayment({{ $order->id }})"
                         class="btn btn-success rounded-pill px-4">
-                        Konfirmasi Pembayaran
+                        Confirm Payment
                     </button>
                     @endif
 
@@ -114,18 +114,18 @@
             </div>
 
             <!-- FORM RESI MUNCUL HANYA KETIKA DIPERLUKAN -->
-            @if($order->status === 'Dikemas')
+            @if($order->status === 'Packing')
             <div class="card border-0 shadow-sm p-4 mb-4">
 
-                <h6 class="fw-bold mb-3">Kirim Pesanan</h6>
+                <h6 class="fw-bold mb-3">Ship Order</h6>
 
                 <div class="mb-3">
-                    <label class="form-label">Nomor Resi</label>
+                    <label class="form-label">Tracking Number</label>
                     <input
                         type="text"
                         wire:model="resi"
                         class="form-control @error('resi') is-invalid @enderror"
-                        placeholder="Masukkan nomor resi">
+                        placeholder="Enter tracking number">
 
                     @error('resi')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -135,7 +135,7 @@
                 <button
                     wire:click="sendOrder({{ $order->id }})"
                     class="btn btn-primary rounded-pill px-4">
-                    Kirim Pesanan
+                    Ship Order
                 </button>
 
             </div>

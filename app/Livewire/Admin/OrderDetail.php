@@ -32,7 +32,7 @@ class OrderDetail extends Component
             $this->js(<<<'JS'
             Swal.fire({
                 icon: 'error',
-                title: 'Pesanan tidak ditemukan!',
+                title: 'Order not found!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,
@@ -47,7 +47,7 @@ class OrderDetail extends Component
             $this->js(<<<'JS'
             Swal.fire({
                 icon: 'warning',
-                title: 'Belum ada bukti pembayaran!',
+                title: 'No payment proof yet!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,
@@ -57,12 +57,12 @@ class OrderDetail extends Component
             return;
         }
 
-        // Update status order jadi "Dikemas"
-        $order->update(['status' => 'Dikemas']);
+        // Update status order jadi "Packing"
+        $order->update(['status' => 'Packing']);
 
-        // Update status pembayaran jadi "Dikonfirmasi"
+        // Update status pembayaran jadi "Confirmed"
         $order->payment->update([
-            'status' => 'Dikonfirmasi',
+            'status' => 'Confirmed',
             'payment_date' => now(),
         ]);
 
@@ -81,7 +81,7 @@ class OrderDetail extends Component
         $this->js(<<<'JS'
         Swal.fire({
             icon: 'success',
-            title: 'Pembayaran berhasil dikonfirmasi!',
+            title: 'Payment confirmed successfully!',
             toast: true,
             position: 'top-end',
             timer: 2000,
@@ -103,7 +103,7 @@ class OrderDetail extends Component
             $this->js(<<<'JS'
         Swal.fire({
             icon: 'error',
-            title: 'Pesanan tidak ditemukan!',
+            title: 'Order not found!',
             toast: true,
             position: 'top-end',
             timer: 2000,
@@ -113,11 +113,11 @@ class OrderDetail extends Component
             return;
         }
 
-        if ($order->status !== 'Dikemas') {
+        if ($order->status !== 'Packing') {
             $this->js(<<<'JS'
         Swal.fire({
             icon: 'warning',
-            title: 'Pesanan belum siap dikirim!',
+            title: 'Order not ready to be shipped!',
             toast: true,
             position: 'top-end',
             timer: 2000,
@@ -129,7 +129,7 @@ class OrderDetail extends Component
 
         // Update status + resi
         $order->update([
-            'status' => 'Dikirim',
+            'status' => 'Shipped',
             'tracking_number' => $this->resi,
             'shipping_date' => now(),
         ]);
@@ -137,7 +137,7 @@ class OrderDetail extends Component
         $this->js(<<<'JS'
         Swal.fire({
             icon: 'success',
-            title: 'Pesanan berhasil dikirim!',
+            title: 'Order shipped successfully!',
             toast: true,
             position: 'top-end',
             timer: 2000,

@@ -87,9 +87,8 @@
                                                 <i class="ti ti-edit"></i>
                                             </a>
 
-                                            <button wire:click="delete({{ $product->id }})"
-                                                class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Hapus produk ini?')">
+                                            <button wire:click="$dispatch('confirm-delete', { id: {{ $product->id }} })"
+                                                class="btn btn-sm btn-danger">
                                                 <i class="ti ti-trash"></i>
                                             </button>
                                         </div>
@@ -111,3 +110,31 @@
         </div>
     </div>
 </div>
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('confirm-delete', data => {
+
+            Swal.fire({
+                title: 'Delete Product?',
+                text: "This product will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteProduct', {
+                        id: data.id
+                    });
+                }
+            });
+
+        });
+    });
+</script>
+@endpush

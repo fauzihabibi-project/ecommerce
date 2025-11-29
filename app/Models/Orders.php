@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,6 +19,8 @@ class Orders extends Model
         'tracking_number',
         'status',
         'payment_proof',
+        'cancellation_reason',
+        'cancelled_at',
     ];
 
     // Relasi ke user
@@ -48,5 +51,19 @@ class Orders extends Model
     public function transaction()
     {
         return $this->hasOne(Transactions::class);
+    }
+
+
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->id);
+    }
+
+    public static function findByHashid($hashid)
+    {
+        $decoded = Hashids::decode($hashid);
+        $id = $decoded[0] ?? null;
+
+        return $id ? self::find($id) : null;
     }
 }

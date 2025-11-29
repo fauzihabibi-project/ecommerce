@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg py-3">
 
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#">E-COMMERCE</a>
+        <a class="navbar-brand fw-bold" href="#">CREATIVE COMPUTER</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
             <ul class="navbar-nav me-3">
                 <li class="nav-item"><a class="nav-link" wire:navigate href="{{ route('home') }}">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" wire:navigate href="{{ route('shop') }}">SHOP</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">SERVICES</a></li>
+                <li class="nav-item"><a class="nav-link" wire:navigate href="{{ route('services') }}">SERVICES</a></li>
                 <li class="nav-item"><a class="nav-link" wire:navigate href="{{ route('cart') }}">CART</a></li>
             </ul>
 

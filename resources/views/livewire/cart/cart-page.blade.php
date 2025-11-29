@@ -6,7 +6,7 @@
             @if ($cartItems->isEmpty())
             <div class="alert alert-warning text-center py-4 rounded-4 shadow-sm">
                 <i class="bi bi-cart-x fs-3 d-block mb-2"></i>
-                Keranjang Anda kosong.
+                Your cart is empty.
             </div>
             @else
             @foreach ($cartItems as $index => $item)
@@ -33,7 +33,7 @@
                             <small class="text-muted d-block text-truncate mb-1" style="max-width: 200px;">
                                 {{ $item->product->description }}
                             </small>
-                            <small class="text-success fw-semibold">Stok: {{ $item->product->stock }}</small>
+                            <small class="text-success fw-semibold">Stock: {{ $item->product->stock }}</small>
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
 
                         <button wire:click="removeItem({{ $item->id }})"
                             class="btn btn-link text-danger mt-2 small text-decoration-none">
-                            <i class="bi bi-trash me-1"></i> Hapus
+                            <i class="bi bi-trash me-1"></i> Remove
                         </button>
                     </div>
                 </div>
@@ -66,17 +66,17 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body">
-                    <h5 class="fw-bold mb-4">Rincian Pembayaran</h5>
+                    <h5 class="fw-bold mb-4">Payment Details</h5>
 
                     <div class="d-flex justify-content-between mb-2">
-                        <span>{{ $cartItems->count() }} Produk</span>
+                        <span>{{ $cartItems->count() }} Products</span>
                         <span>Rp{{ number_format($total, 0, ',', '.') }}</span>
                     </div>
 
                     <hr>
 
                     <div class="d-flex justify-content-between fw-bold mb-3">
-                        <span>Total Bayar</span>
+                        <span>Total Payment</span>
                         <span class="text-primary">
                             Rp{{ number_format($total , 0, ',', '.') }}
                         </span>
@@ -84,7 +84,7 @@
 
                     <button wire:click="proceedToCheckout"
                         class="btn btn-primary w-100 py-2 fw-semibold rounded-pill shadow-sm">
-                        <i class="bi bi-credit-card me-2"></i> Lanjut ke Pembayaran
+                        <i class="fa fa-credit-card me-2"></i> Checkout
                     </button>
                 </div>
             </div>

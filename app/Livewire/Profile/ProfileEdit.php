@@ -6,73 +6,77 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 #[Layout('components.layouts.master')]
 class ProfileEdit extends Component
 {
     use WithFileUploads;
 
-    public $name;
-    public $email;
-    public $phone;
-    public $password;
-    public $foto;
+    public $name, $username, $email, $phone, $password, $foto;
 
     public function mount()
     {
         $user = Auth::user();
 
         $this->name = $user->name;
+        $this->username = $user->username;
         $this->email = $user->email;
         $this->phone = $user->phone;
     }
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email',
-        'phone' => 'nullable|string|max:15',
-        'password' => 'nullable|min:6',
-        'foto' => 'nullable|image|max:2048',
-    ];
+    protected function rules()
+    {
+        return [
+            'foto'      => ['nullable', 'image', 'max:2048'],
+            'name'      => ['required', 'string', 'max:255'],
+            'username'  => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users', 'username')->ignore(Auth::id())
+            ],
+            'phone'     => ['nullable', 'string', 'max:15'],
+            'password'  => ['nullable', 'string', 'min:5', 'confirmed'],
+        ];
+    }
 
     public function updateProfile()
     {
         $this->validate();
 
-        $user = \App\Models\User::find(Auth::id());
+        $user = Auth::user();
 
         $data = [
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'phone' => $this->phone,
         ];
 
         if ($this->foto) {
-            $path = $this->foto->store('profile_photos', 'public');
-            $data['foto'] = $path;
+            $data['foto'] = $this->foto->store('profile_photos', 'public');
         }
 
         if ($this->password) {
-            $data['password'] = \Illuminate\Support\Facades\Hash::make($this->password);
+            $data['password'] = bcrypt($this->password);
         }
 
         $user->update($data);
 
         $this->js(<<<JS
-        Swal.fire({
-            icon: 'success',
-            title: 'Profil berhasil diperbarui!',
-            toast: true,
-            position: 'top-end',
-            timer: 2000,
-            showConfirmButton: false
-        });
-    JS);
+            Swal.fire({
+                icon: 'success',
+                title: 'Profile updated successfully!',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        JS);
 
         return redirect()->route('profile');
     }
-
 
     public function render()
     {

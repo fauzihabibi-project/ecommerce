@@ -62,22 +62,17 @@
                                     <td>{{ \Carbon\Carbon::parse($transactions->transaction_date)->format('d M Y') }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#"
+                                            <a href="{{ route('order.detail', $transactions->order_id) }}"
                                                 class="btn btn-sm btn-primary">
                                                 <i class="ti ti-eye"></i>
                                             </a>
-                                            <button wire:click="#"
-                                                class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Hapus pesanan ini?')">
-                                                <i class="ti ti-trash"></i>
-                                            </button>
                                         </div>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
                                     <td colspan="8" class="text-center text-muted py-4">
-                                        Belum ada pesanan
+                                        No Transactions Yet
                                     </td>
                                 </tr>
                                 @endforelse

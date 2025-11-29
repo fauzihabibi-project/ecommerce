@@ -6,23 +6,32 @@
     @if($orders->isEmpty())
     <div class="text-center p-5 rounded shadow-sm">
         <i class="bi bi-box-seam display-4 text-secondary mb-3"></i>
-        <p class="text-muted mb-0">Belum ada pesanan yang dibuat.</p>
+        <p class="text-muted mb-0">No orders have been placed yet.</p>
     </div>
     @else
     @foreach($orders as $order)
     <div class="card mb-4 shadow-sm border-0">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <h6 class="fw-bold mb-0">Pesanan {{ $order->id }}</h6>
-                <span class="badge bg-warning text-dark">{{ $order->status }}</span>
+                <p class="mb-2 text-muted small">
+                    Address: {{ $order->address->recipient_name ?? '-' }} -
+                    {{ $order->address->city->name ?? '' }}
+                </p>
+                @php
+                $color = match ($order->status) {
+                'Dibatalkan' => 'bg-danger',
+                'Dikirim' => 'bg-success',
+                default => 'bg-primary',
+                };
+                @endphp
+
+                <span class="badge {{ $color }}">
+                    {{ $order->status }}
+                </span>
+
             </div>
 
-            <p class="mb-2 text-muted small">
-                Alamat: {{ $order->address->recipient_name ?? '-' }} -
-                {{ $order->address->city->name ?? '' }}
-            </p>
-
-            <!-- Daftar Produk -->
+            <!-- Product List -->
             @foreach($order->items as $item)
             @php
             $images = json_decode($item->product->image, true) ?? [];
@@ -43,7 +52,7 @@
                     <!-- Detail Produk -->
                     <div class="flex-grow-1">
                         <strong>{{ $item->product->name }}</strong><br>
-                        <small class="text-muted">Jumlah: {{ $item->quantity }}</small>
+                        <small class="text-muted">Qty: {{ $item->quantity }}</small>
                     </div>
 
                     <!-- Subtotal -->
@@ -58,7 +67,7 @@
 
             <!-- Ringkasan -->
             <div class="d-flex justify-content-between mt-3">
-                <span class="fw-semibold">Total (termasuk ongkir):</span>
+                <span class="fw-semibold">Total (including shipping):</span>
                 <span class="fw-bold text-primary">
                     Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                 </span>
@@ -68,11 +77,11 @@
                 @if($order->status === 'Menunggu Pembayaran')
                 <a href="{{ route('user.payment', ['orderId' => $order->id]) }}"
                     class="btn btn-sm btn-outline-primary rounded-pill px-3">
-                    <i class="bi bi-credit-card me-1"></i> Bayar Sekarang
+                    <i class="bi bi-credit-card me-1"></i> Pay Now
                 </a>
                 @else
-                <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
-                    <i class="bi bi-info-circle me-1"></i> Detail
+                <a href="{{ route('user.order.detail', $order->hashid) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                    <i class="fa fa-eye me-1"></i> Details
                 </a>
                 @endif
             </div>

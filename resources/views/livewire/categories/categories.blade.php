@@ -28,7 +28,7 @@
                                             <a href="{{ route('category.edit', $category->id) }}" wire:navigate class="btn btn-sm btn-warning">
                                                 <i class="ti ti-edit"></i>
                                             </a>
-                                            <button class="btn btn-sm btn-danger" wire:click="delete({{ $category->id }})">
+                                            <button class="btn btn-sm btn-danger" wire:click="$dispatch('confirm-delete', { id: {{ $category->id }} })">
                                                 <i class="ti ti-trash"></i>
                                             </button>
 
@@ -48,3 +48,31 @@
         </div>
     </div>
 </div>
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('confirm-delete', data => {
+
+            Swal.fire({
+                title: 'Delete Category?',
+                text: "This category will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteCategory', {
+                        id: data.id
+                    });
+                }
+            });
+
+        });
+    });
+</script>
+@endpush

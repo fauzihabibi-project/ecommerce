@@ -65,7 +65,7 @@
                                     <i class="fas fa-calendar text-warning fs-4"></i>
                                 </div>
                                 <div>
-                                    <h6 class="text-muted mb-1">Dibuat Pada</h6>
+                                    <h6 class="text-muted mb-1">Made On</h6>
                                     <p class="fw-semibold mb-0">
                                         {{ $user->created_at->format('d M Y') }}
                                     </p>
@@ -80,7 +80,7 @@
 
                         <!-- Tombol Kembali -->
                         <a href="{{ route('dashboard') }}" class="btn btn-secondary px-4 py-2 rounded-3">
-                            <i class="fas fa-arrow-left me-1"></i> Kembali
+                            <i class="fas fa-arrow-left me-1"></i> Back
                         </a>
 
                         <!-- Tombol Edit Profile -->

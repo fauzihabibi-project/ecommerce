@@ -7,9 +7,13 @@ use App\Models\Categories as ModelsCategories;
 
 class Categories extends Component
 {
+    protected $listeners = [
+        'deleteCategory' => 'delete'
+    ];
+    
     public function delete($id)
     {
-        $category = \App\Models\Categories::find($id);
+        $category = ModelsCategories::find($id);
 
         if (! $category) {
             $this->js(<<<JS
@@ -26,13 +30,15 @@ class Categories extends Component
         $category->delete();
 
         $this->js(<<<JS
-        Swal.fire({
-            icon: 'success',
-            title: 'Kategori berhasil dihapus',
-            showConfirmButton: false,
-            timer: 1500
-        });
-    JS);
+            Swal.fire({
+                icon: 'success',
+                title: 'Category deleted successfully!',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        JS);
     }
 
     public function render()

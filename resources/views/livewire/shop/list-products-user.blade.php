@@ -71,7 +71,7 @@
                         <a wire:navigate
                             href="{{ route('user.product.detail', $product->slug) }}"
                             class="btn btn-primary w-100 mt-3 rounded-pill shadow-sm">
-                            <i class="fa fa-eye me-2"></i> Lihat Detail
+                            <i class="fa fa-eye me-2"></i>Detail
                         </a>
                     </div>
                 </div>

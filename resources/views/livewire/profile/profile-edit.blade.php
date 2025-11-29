@@ -19,44 +19,51 @@
 
                     <!-- Nama -->
                     <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
-                        <input type="text" wire:model="name" class="form-control" placeholder="Masukkan nama lengkap">
+                        <label class="form-label">Name</label>
+                        <input type="text" wire:model="name" class="form-control" placeholder="Enter Name">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" wire:model="username" class="form-control" placeholder="Enter Username">
+                        @error('username') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <!-- Email -->
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" wire:model="email" class="form-control" placeholder="Masukkan email">
+                        <input type="email" wire:model="email" class="form-control" placeholder="Enter Email" readonly>
                         @error('email') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
-                    <!-- Nomor Telepon -->
+                    <!-- Phone Number -->
                     <div class="mb-3">
-                        <label class="form-label">Nomor Telepon</label>
-                        <input type="text" wire:model="phone" class="form-control" placeholder="Masukkan nomor telepon">
+                        <label class="form-label">Phone</label>
+                        <input type="text" wire:model="phone" class="form-control" placeholder="Enter Phone Number">
                         @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <!-- Password -->
                     <div class="mb-3">
-                        <label class="form-label">Password Baru (opsional)</label>
-                        <input type="password" wire:model="password" class="form-control" placeholder="Isi jika ingin ubah password">
+                        <label class="form-label">New Password (optional)</label>
+                        <input type="password" wire:model="password" class="form-control" placeholder="Fill if you want to change the password">
                         @error('password') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Konfirmasi Password Baru (opsional)</label>
-                        <input type="password" wire:model="password" class="form-control" placeholder="Isi jika ingin ubah password">
-                        @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                        <label class="form-label">Confirm New Password (optional)</label>
+                        <input type="password" wire:model="password_confirmation" class="form-control" placeholder="Fill if you want to change the password">
+                        @error('password_confirmation') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
-                    <!-- Tombol -->
+                    <!-- Button -->
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <a href="{{ route('profile') }}" wire:navigate class="btn btn-outline-secondary rounded-pill">
-                            Batal
+                            Cancel
                         </a>
                         <button type="submit" class="btn btn-primary rounded-pill">
-                            Simpan Perubahan
+                            Save Changes
                         </button>
                     </div>
                 </form>

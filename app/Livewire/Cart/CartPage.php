@@ -34,13 +34,33 @@ class CartPage extends Component
 
     public function increment($cartId)
     {
-        $cart = Cart::find($cartId);
-        if ($cart) {
-            $cart->quantity++;
-            $cart->save();
-            $this->loadCart();
+        $cart = Cart::with('product')->find($cartId);
+
+        if (!$cart) return;
+
+        $stokTersedia = $cart->product->stock;
+
+        // Jika quantity di cart sudah mencapai stok, hentikan
+        if ($cart->quantity >= $stokTersedia) {
+            $this->js(<<<JS
+            Swal.fire({
+                icon: 'warning',
+                title: 'Insufficient stock!',
+                text: 'Order quantity exceeds product stock.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        JS);
+            return;
         }
+
+        // Kalau masih cukup stok → increment
+        $cart->quantity++;
+        $cart->save();
+
+        $this->loadCart();
     }
+
 
     public function decrement($cartId)
     {
@@ -60,7 +80,7 @@ class CartPage extends Component
         $this->js(<<<JS
             Swal.fire({
                 icon: 'success',
-                title: 'Produk dihapus dari keranjang!',
+                title: 'Product removed from cart!',
                 toast: true,
                 position: 'top-end',
                 timer: 2000,
@@ -76,8 +96,8 @@ class CartPage extends Component
             $this->js(<<<JS
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Keranjang kosong!',
-                    text: 'Tidak bisa melanjutkan ke pembayaran sebelum menambahkan produk ke keranjang.',
+                    title: 'Cart is empty!',
+                    text: 'Cannot proceed to payment before adding products to the cart.',
                     confirmButtonText: 'OK'
                 });
             JS);
