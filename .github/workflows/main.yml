@@ -16,7 +16,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: 151.243.222.70
-        username: creativecomputer@computer.my.id
+        username: creative.computer@computer.my.id
         password: Muhammad@123
         exclude: |
           */.git
